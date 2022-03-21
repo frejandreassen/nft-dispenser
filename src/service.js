@@ -4,7 +4,7 @@ const receiptExample = require('../test/example-safeTransferFrom')
 const nftModel = require('./models/nft')
 
 async function transferNft(tokenId, toAddress) {
-  
+
   // Configuring the connection to the Polygon node
   const network = process.env.POLYGON_NETWORK;
   const web3 = new Web3(
@@ -12,7 +12,7 @@ async function transferNft(tokenId, toAddress) {
       `https://${network}.infura.io/v3/${process.env.INFURA_PROJECT_ID}`
     )
   );
-  
+
   // Creating a signing account from a private key
   const signer = web3.eth.accounts.privateKeyToAccount(
     process.env.SIGNER_PRIVATE_KEY
@@ -22,7 +22,7 @@ async function transferNft(tokenId, toAddress) {
   // Assigning the right amount of gas
   const tx = {
     from: signer.address,
-    to: '0x0F91B8C173eE7fE2Df246639917547a918d2CbE4'
+    to: toAddress
   }
   tx.gas = await web3.eth.estimateGas(tx);
 

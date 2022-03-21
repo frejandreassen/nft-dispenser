@@ -8,34 +8,42 @@ html(lang="en")
         link(rel="preconnect", href="https://fonts.gstatic.com")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap")
-        link(rel="stylesheet", href="css/tailwind/tailwind.min.css")
-        link(rel="icon", type="image/png", sizes="16x16", href="favicon-tailwind.png")
-        script(src="js/main.js")
+        link(rel="stylesheet", href="/css/tailwind/tailwind.min.css")
+        link(rel="icon", type="image/png", sizes="16x16", href="/favicon-tailwind.png")
+        script(src="/js/main.js")
     body(class="antialiased bg-body text-body font-body")
         div(class="")
             section(class="pb-24 xl:pb-0 bg-darkBlueGray-500")
-                div(class="py-8 mx-10 mb-20 xl:mb-52")
+                div(class="py-8 mx-10 mb-20")
                 div(class="container px-4 mx-auto")
                     div(class="relative xl:pb-52 text-center overflow-hidden")
-                        img(class="absolute top-0 bottom-0 h-full left-1/2 mt-20 transform -translate-x-1/2 object-contain", src="uinel-assets/images/sign-up/half-circle.svg", alt="")
+                        img(class="absolute top-0 bottom-0 h-full left-1/2 mt-20 transform -translate-x-1/2 object-contain", src="/uinel-assets/images/sign-up/half-circle.svg", alt="")
                         div(class="relative")
                             span(class="inline-block py-3 px-7 mb-10 text-lg font-medium font-heading leading-5 text-indigo-500 border border-indigo-500 rounded-6xl") Claim your NFT
-                            div(class="w-full px-4 grid justify-items-stretch")
-                                img(class="mb-5 justify-self-center  border-2 border-blue-500 rounded-xl", src="https://lh3.googleusercontent.com/RxtkbYcdihvies69vPLhl0AZ7acCnUCFbzNLjjtCXOjfgNX6PPVB9Z4nyymCmpywHFhLLpvU6rHQCyOd2TY17KaCV5gAc8wc1R4z=w600", alt="")
-                                p(class="text-md text-gray-300") NFT metadata here
                             div(class="mb-14 xl:mb-16")
                                 h2(class="text-9xl md:text-10xl xl:text-11xl text-white leading-tight font-heading font-medium") Falkenberg Foodie
-                            div(class="max-w-md mx-auto")
-                                input(class="w-full mb-6 py-5 px-12 text-md border-2 border-blue-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50", type="string", placeholder="Your wallet address: e.g. 0x1ed3...")
-                                //- div(class="relative mb-14 flex justify-center items-center")
-                                //-     a(class="inline-block mr-4 -mt-5", href="#")
-                                //-         img(src="uinel-assets/images/sign-up/check.svg", alt="")
-                                //-     input(style="appearance: none;", type="checkbox")
-                                p(class="text-gray-200") Don't have a wallet yet? Read the guide below
-                                a(class="block mt-5 py-5 px-10 mx-auto w-full md:max-w-max text-xl leading-6 text-white font-medium tracking-tighter font-heading bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl", href="#") Claim now
+                            div(class="w-full px-4 grid justify-items-stretch")
+                                img(class="mb-5 justify-self-center  border-2 border-darkBlueGray-500 rounded-xl", src=nft.tokenImgUrl, alt="")
+                                h5(class="text-5xl md:text-6xl xl:text-7xl text-white") #{nft.tokenName}
+                                p(class="text-md text-gray-300") #{nft.tokenDescription}
+                            
+                            if (!nft.claimed)
+                                form(action="" method="POST")
+                                    div(class="max-w-md mx-auto my-10")
+                                        if (!secret)
+                                            input(class="w-full mb-6 py-5 px-12 text-md border-2 border-blue-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50", name="claimSecret", type="string", placeholder="Secret code: e.g. ak...33")
+                                        input(class="w-full mb-6 py-5 px-12 text-md xl:text-xl border-2 border-blue-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50", name="toAddress", type="string", placeholder="Your wallet address: e.g. 0x1ed3...")
+                                        //- div(class="relative mb-14 flex justify-center items-center")
+                                        //-     a(class="inline-block mr-4 -mt-5", href="#")
+                                        //-         img(src="uinel-assets/images/sign-up/check.svg", alt="")
+                                        //-     input(style="appearance: none;", type="checkbox")
+                                        
+                                        button(class="block my-5 py-5 px-10 mx-auto w-full md:max-w-max text-xl leading-6 text-white font-medium tracking-tighter font-heading bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl", type="submit") Claim now
+                                        p(class="text-gray-200") Don't have a wallet yet? Get started 
+                                            a(class="underline" href="#FAQ") here
             
             //FAQ
-            section(class="font-medium bg-darkBlueGray-300 py-24 2xl:pt-64 2xl:pb-48")
+            section#FAQ(class="font-medium bg-yellow-500 py-24 2xl:pt-64 2xl:pb-48")
                 div(class="container px-4 mx-auto")
                     span(class="block mb-9 uppercase tracking-widest text-xs leading-4") Guide
                     h2(class="mb-20 xl:mb-24 font-heading text-9xl md:text-10xl xl:text-11xl leading-tight") Getting started

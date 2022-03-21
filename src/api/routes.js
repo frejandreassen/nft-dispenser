@@ -1,17 +1,20 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res) => {res.status(200).render("index")})
+const claimsController = require('../controllers/claims')
+const nftsController = require('../controllers/nfts')
+
+router.get('/', (req, res) => {res.status(200).render("nft")})
 
 
 //Set up NFTs
-// router.get('/create', (req, res) => {res.status(200).render("create-nft")})
-// router.post('/create', nftController.create)
+router.get('/create/:contractId', (req, res) => {res.status(200).render("create-nft")})
+router.post('/create/:contractId', nftsController.create)
 // router.get('/:tokenId', nftController.get)
 
 //Claim NFT
-// router.get('/:tokenId/claim/:claimCode', claimsController.get)
-// router.post('/:tokenId/claim/:claimCode', claimsController.post)
+router.get('/nft/:slug', claimsController.get)
+router.post('/nft/:slug', claimsController.post)
 
 // Redeem value
 // router.get('/:tokenId/redeem/:redeemCode', redeemsController.get)

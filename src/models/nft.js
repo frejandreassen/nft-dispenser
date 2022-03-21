@@ -3,22 +3,46 @@ const datastore = new Datastore({
   projectId: 'andreassens',
 });
 
-const insert = () => {
+const insert = (nft) => {
   const NFTKey = datastore.key('NFT');
   const entity = {
     key: NFTKey,
     data: [
       {
-        name: 'redeemedAt',
+        name: 'contractId',
+        value: nft.contractId,
+      },
+      {
+        name: 'created',
         value: new Date().toJSON(),
       },
       {
-        name: 'claimAddress',
-        value: '0x2as81..92',
+        name: 'tokenId',
+        value: nft.tokenId,
       },
       {
-        name: 'tokenId',
-        value: '12342122',
+        name: 'tokenName',
+        value: nft.tokenName,
+      },
+      {
+        name: 'slug',
+        value: nft.slug,
+      },
+      {
+        name: 'tokenDescription',
+        value: nft.tokenDescription,
+      },
+      {
+        name: 'tokenImgUrl',
+        value: nft.tokenImgUrl,
+      },
+      {
+        name: 'claimSecret',
+        value: nft.claimSecret,
+      },
+      {
+        name: 'redeemSecret',
+        value: nft.redeemSecret,
       },
     ],
   };
@@ -32,6 +56,22 @@ const getById = (id) => {
 
   return datastore.runQuery(query);
 }
+
+const getBySlug = (slug) => {
+  const query = datastore
+    .createQuery('NFT')
+    .filter('slug', '=', slug);
+
+  return datastore.runQuery(query);
+}
+
+const find = (property, value) => {
+  const query = datastore
+    .createQuery('NFT')
+    .filter(`${property}`, '=', value);
+
+  return datastore.runQuery(query);
+}
 const list = () => {
   const query = datastore
     .createQuery('NFT')
@@ -42,4 +82,6 @@ const list = () => {
 
 module.exports.insert = insert
 module.exports.getById = getById
+module.exports.getBySlug = getBySlug
+module.exports.find = find
 module.exports.list = list

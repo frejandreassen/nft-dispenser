@@ -1,3 +1,4 @@
+require('dotenv').config()
 const routes = require('./src/api/routes')
 
 const express = require('express')
@@ -6,7 +7,7 @@ const path = require('path')
 
 const port = process.env.PORT || 8080
 app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "src/pug"));
+app.set("views", path.join(__dirname, "src/views"));
 app.use("/", express.static(path.join(__dirname, "public")))
 // app.use(helmet())
 // app.use(cors())
